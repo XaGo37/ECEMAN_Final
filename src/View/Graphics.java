@@ -15,21 +15,18 @@ public class Graphics extends JFrame {
     private ImageIcon perso;
     private ImageIcon arrival;
     private ImageIcon background;
-
+    private ImageIcon background1;
     Map map = new Map(ChargeMap.mapLVL1);
 
-
     public Graphics() {
-
         PrintFrame();
     }
 
     public void PrintFrame() {
 
-
         JFrame frame = new JFrame("ECEMAN");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(750, 1000);
+        frame.setSize(650, 400);
 
         JPanel panel = new JPanel(new GridLayout(10, 19,0,0));
 
@@ -38,16 +35,15 @@ public class Graphics extends JFrame {
         wall = new ImageIcon("src/img/mur.PNG");
         water = new ImageIcon("src/img/eau.PNG");
         glace = new ImageIcon("src/img/glace.PNG");
-        perso = new ImageIcon("src/img/perso.PNG");
+        perso = new ImageIcon("src/img/penguin.gif");
         arrival = new ImageIcon("src/img/sortie.PNG");
         background = new ImageIcon("src/img/background.png");
-
-
+        background1  = new ImageIcon("src/img/unnamed.png");
         if(map != null){
             for (int i = 0; i < map.getSizeY(); i++) {
                 for (int j = 0; j < map.getSizeX(); j++) {
                     if (map.getCase(i, j) == '#') {
-                        label = new JLabel(background);
+                        label = new JLabel(background1);
                         panel.add(label);
                     }
                     if (map.getCase(i, j) == 'M') {
@@ -71,9 +67,7 @@ public class Graphics extends JFrame {
                         panel.add(label);
                     }
                 }
-
         }
-
         frame.setContentPane(panel);
         frame.setVisible(true);
 
