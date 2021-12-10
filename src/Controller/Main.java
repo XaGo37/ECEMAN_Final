@@ -1,19 +1,19 @@
 package Controller;
 
-import Model.ChargeMap;
-import View.Affichage;
+
+import View.Graphics;
+import com.sun.deploy.panel.RuleSetViewerDialog;
 
 import java.io.*;
-import java.util.Scanner;
-
 import static Controller.Play.*;
-import static Model.ChargeMap.mapLVL3;
+
 
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        Graphics home = new Graphics();
 
         int userSelected;
         do {
@@ -37,7 +37,12 @@ public class Main {
             }
         }
         while (userSelected > 4);
+
+        home.setVisible(true);
+
     }
+
+
 }
 
 
