@@ -35,12 +35,12 @@ public class Graphics extends JFrame {
 
         JLabel label = new JLabel();
 
-        wall = new ImageIcon("/Users/Constance/IdeaProjects/ECEMAN_ProjectJava/src/img/mur.PNG");
-        water = new ImageIcon("/Users/Constance/IdeaProjects/ECEMAN_ProjectJava/src/img/eau.PNG");
-        glace = new ImageIcon("/Users/Constance/IdeaProjects/ECEMAN_ProjectJava/src/img/glace.PNG");
-        perso = new ImageIcon("/Users/Constance/IdeaProjects/ECEMAN_ProjectJava/src/img/perso.PNG");
-        arrival = new ImageIcon("/Users/Constance/IdeaProjects/ECEMAN_ProjectJava/src/img/sortie.PNG");
-        background = new ImageIcon("/Users/Constance/IdeaProjects/ECEMAN_ProjectJava/src/img/background.png");
+        wall = new ImageIcon("src/img/mur.PNG");
+        water = new ImageIcon("src/img/eau.PNG");
+        glace = new ImageIcon("src/img/glace.PNG");
+        perso = new ImageIcon("src/img/perso.PNG");
+        arrival = new ImageIcon("src/img/sortie.PNG");
+        background = new ImageIcon("src/img/background.png");
 
 
         if(map != null){
