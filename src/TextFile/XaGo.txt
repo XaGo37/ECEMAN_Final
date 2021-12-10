@@ -1,0 +1,17 @@
+###################
+###################
+###################
+###################
+###################
+MMMMMMMMMMMMMMMMMMM
+M  PooooooooooEoooM
+MMMMMMMMMMMMMMMMMMM
+###################
+###################
+DATA
+level:1
+x:6
+y:3
+case:o
+isLight:false
+lifes:3
