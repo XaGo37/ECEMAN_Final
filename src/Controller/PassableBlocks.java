@@ -1,4 +1,4 @@
-package ECEMAN;
+package Controller;
 
 public enum PassableBlocks {
     o('o'),X('X'),E('E'),SPACE(' '),T('T'), t('t'),L('L');

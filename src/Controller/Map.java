@@ -1,4 +1,4 @@
-package ECEMAN;
+package Controller;
 
 import java.util.ArrayList;
 

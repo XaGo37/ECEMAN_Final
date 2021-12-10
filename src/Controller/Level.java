@@ -1,7 +1,4 @@
-package ECEMAN;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+package Controller;
 
 public class Level  {
 
@@ -99,13 +96,13 @@ public class Level  {
             case 'o' :
                 map.setCase(x,y,' ');
                 break;
-            case 'X' :
+            case 'X' : // GLACE EPAISSE
                 map.setCase(x,y,'o');
                 break;
-            case 'T' :
+            case 'T' : //TELEPORTEUR
                 map.setCase(x,y,'t');
                 break;
-            case 'L' :
+            case 'L' : //LEGERETE
                 map.setCase(x,y,'o');
                 perso.setIslight(true);
                 break;

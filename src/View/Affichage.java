@@ -1,4 +1,7 @@
-package ECEMAN;
+package View;
+
+import Controller.Perso;
+import Controller.Map;
 
 public class Affichage {
 
