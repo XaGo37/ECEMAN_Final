@@ -1,12 +1,8 @@
 package Controller;
-
-
 import View.Graphics;
-import com.sun.deploy.panel.RuleSetViewerDialog;
 
 import java.io.*;
 import static Controller.Play.*;
-
 
 
 public class Main {
@@ -44,5 +40,3 @@ public class Main {
 
 
 }
-
-

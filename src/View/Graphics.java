@@ -5,6 +5,8 @@ import Model.ChargeMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class Graphics extends JFrame {
@@ -72,5 +74,7 @@ public class Graphics extends JFrame {
         frame.setVisible(true);
 
     }}
+
+
 }
 
