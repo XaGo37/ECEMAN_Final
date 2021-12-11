@@ -1,11 +1,13 @@
 package Controller;
 
-public class Level  {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    private Map map;
+public class Level implements ActionListener {
+
+    protected static Map map;
     private Map startMap;
-    private Perso perso;
-    // private Enemy enemy;
+    protected Perso perso;
     private boolean isDone = false;
     private boolean isOver = false;
 
@@ -28,14 +30,18 @@ public class Level  {
         }
     }
 
-    public void movePerso(char direction) {
+    public void movePerso(char choice) {
 
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         char tempCurrentCase = perso.getCurrentCase();
         boolean playerMoved = false;
 
-        switch (direction) {
+        Keyboard key = new Keyboard(map,perso);
+
+
+
+        /*switch (direction) {
             case 'z':
                 if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {
                     perso.setCurrentCase(map.getCase(tempPosX - 1, tempPosY));
@@ -67,7 +73,7 @@ public class Level  {
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
-        }
+        }*/
         if(playerMoved == true && perso.getCurrentCase() == 'T'){
             teleportPerso(perso.getxPerso(), perso.getyPerso());
         }
@@ -128,7 +134,7 @@ public class Level  {
         }
     }
 
-    private boolean testBlock(int x, int y) {
+    static boolean testBlock(int x, int y) {
         for (PassableBlocks passBlock : PassableBlocks.values()) {
             System.out.println(map.getCase(x, y));
             if (map.getCase(x, y) == passBlock.asChar()) {
@@ -152,5 +158,10 @@ public class Level  {
 
     public void setOver(boolean over) {
         isOver = over;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

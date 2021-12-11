@@ -20,6 +20,8 @@ public class Graphics extends JFrame {
     private ImageIcon background1;
     Map map = new Map(ChargeMap.mapLVL1);
 
+    KeyListener k;
+
     public Graphics() {
         PrintFrame();
     }

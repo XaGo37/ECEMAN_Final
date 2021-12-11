@@ -33,7 +33,6 @@ public class Map {
         map[x][y] = carCase;
     }
 
-
 }
 
 

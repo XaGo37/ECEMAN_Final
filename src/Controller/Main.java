@@ -18,7 +18,6 @@ public class Main {
                 case 1:
                     System.out.println("Voici les règles du jeu :");
                     System.out.println("##########################");
-
                     break;
                 case 2:
                     playGame(false, null);
@@ -35,8 +34,5 @@ public class Main {
         while (userSelected > 4);
 
         home.setVisible(true);
-
     }
-
-
 }
