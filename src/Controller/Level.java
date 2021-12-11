@@ -1,9 +1,15 @@
 package Controller;
 
+import View.Affichage;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Level implements ActionListener {
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+
+public class Level {
 
     protected static Map map;
     private Map startMap;
@@ -12,13 +18,15 @@ public class Level implements ActionListener {
     private boolean isOver = false;
 
     public Level(Map map, Perso perso) {
+
         this.map = map;
         this.startMap = new Map(map.getMap().clone());
         this.perso = perso;
         startLevel();
     }
 
-    private void startLevel() {
+    public void startLevel() {
+
         this.map.setMap(startMap.getMap());
         perso.initPerso();
         for (int i = 0; i < map.getSizeY(); i++) {
@@ -29,20 +37,15 @@ public class Level implements ActionListener {
             }
         }
     }
-
-    public void movePerso(char choice) {
+    public void movePerso(int direction) {
 
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         char tempCurrentCase = perso.getCurrentCase();
         boolean playerMoved = false;
 
-        Keyboard key = new Keyboard(map,perso);
-
-
-
-        /*switch (direction) {
-            case 'z':
+        switch (direction) {
+            case 90:
                 if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {
                     perso.setCurrentCase(map.getCase(tempPosX - 1, tempPosY));
                     perso.setxPerso(perso.getxPerso() - 1);
@@ -50,7 +53,7 @@ public class Level implements ActionListener {
                     playerMoved = true;
                 }
                 break;
-            case 's':
+            case 83:
                 if (testBlock(perso.getxPerso() + 1, perso.getyPerso())) {
                     perso.setCurrentCase(map.getCase(tempPosX + 1, tempPosY));
                     perso.setxPerso(perso.getxPerso() + 1);
@@ -58,7 +61,7 @@ public class Level implements ActionListener {
                     playerMoved = true;
                 }
                 break;
-            case 'q':
+            case 81:
                 if (testBlock(perso.getxPerso(), perso.getyPerso() - 1)) {
                     perso.setCurrentCase(map.getCase(tempPosX, tempPosY - 1));
                     perso.setyPerso(perso.getyPerso() - 1);
@@ -66,21 +69,23 @@ public class Level implements ActionListener {
                     playerMoved = true;
                 }
                 break;
-            case 'd':
+            case 68:
                 if (testBlock(perso.getxPerso(), perso.getyPerso() + 1)) {
                     perso.setCurrentCase(map.getCase(tempPosX, tempPosY + 1));
                     perso.setyPerso(perso.getyPerso() + 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
                 }
-        }*/
+        }
         if(playerMoved == true && perso.getCurrentCase() == 'T'){
             teleportPerso(perso.getxPerso(), perso.getyPerso());
         }
         if(playerMoved == true){
             changeCase(tempCurrentCase,tempPosX,tempPosY);
         }
+        Affichage.afficher(map,perso);
     }
+
 
     private void changeCase(char currentCase, int x, int y){
         if(perso.getCurrentCase() == 'E') {
@@ -160,8 +165,4 @@ public class Level implements ActionListener {
         isOver = over;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

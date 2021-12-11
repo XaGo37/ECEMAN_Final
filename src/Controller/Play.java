@@ -3,6 +3,9 @@ package Controller;
 import Model.ChargeMap;
 import View.Affichage;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,11 +15,11 @@ import java.util.Scanner;
 import static Controller.Save.readTextFile;
 import static Controller.Save.saveToTextFile;
 
-public class Play {
+public class Play  {
 
     private static Perso player = new Perso(0, 0);
-    static int lvlnumber = 1;
-
+    public static int lvlnumber = 1;
+    Map mapLvl1 = new Map(ChargeMap.mapLVL1);
     static void chooseTextFile() {
         System.out.println("Sauvegardes disponibles:");
         File f = new File("src/TextFile/");
@@ -50,7 +53,7 @@ public class Play {
         Map mapLvl3 = new Map(ChargeMap.mapLVL3);
         Map mapLvl4 = new Map(ChargeMap.mapLVL4);
 
-
+        lvlnumber = 1;
         while (lvlnumber <= 4) {
 
             if(isSavedLevel) {
@@ -65,36 +68,31 @@ public class Play {
                     System.out.println("LEVEL 1 ");
                     PlayLevel(player,mapLvl1);
                     System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
                 case 2:
                     System.out.println("LEVEL 2 ");
                     PlayLevel(player,mapLvl2);
                     System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
                 case 3:
                     System.out.println("LEVEL 3 ");
                     PlayLevel(player,mapLvl3);
                     System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
                 case 4:
                     System.out.println("LEVEL 4");
                     PlayLevel(player,mapLvl4);
                     System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
             }
         }
     }
 
     private static void PlayLevel(Perso player, Map map) throws IOException {
+       Level lvl = new Level(map, player);
 
-   //     Keyboard key = new Keyboard(map,player);
 
-        Level lvl = new Level(map, player);
-        Scanner sc = new Scanner(System.in);
+      /*  Scanner sc = new Scanner(System.in);
         while (!lvl.isOver() && !lvl.isDone())
         {
             Affichage.afficher(map, player);
@@ -108,7 +106,6 @@ public class Play {
                 System.out.println("LE JEU A ETE SAUVEGARDE");
                 System.exit(0);
             }
-            lvl.movePerso(choice);
         }
         if (lvl.isDone()) {
             player.setCurrentCase('o');
@@ -118,6 +115,7 @@ public class Play {
         if (lvl.isOver()) {
             System.out.println("LOOSER");
             System.exit(0);
-        }
+        }*/
+
     }
     }

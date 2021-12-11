@@ -7,11 +7,16 @@ import static Controller.Play.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Graphics().setVisible(true);
+            }
+        });
 
-        Graphics home = new Graphics();
+      //  Graphics home = new Graphics();
 
-        int userSelected;
+    /*    int userSelected;
         do {
             userSelected = MenuData();
             switch (userSelected) {
@@ -33,6 +38,16 @@ public class Main {
         }
         while (userSelected > 4);
 
-        home.setVisible(true);
+      //  home.setVisible(true);
+
+    }*/
+    public static void main(String[] args) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Graphics().setVisible(true);
+            }
+        });
     }
-}
+
+    }

@@ -1,12 +1,19 @@
 package View;
 
+import Controller.Level;
 import Controller.Map;
+import Controller.Perso;
+import Controller.Play;
 import Model.ChargeMap;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Scanner;
+
+import static Controller.Save.saveToTextFile;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 
 public class Graphics extends JFrame {
@@ -19,11 +26,14 @@ public class Graphics extends JFrame {
     private ImageIcon background;
     private ImageIcon background1;
     Map map = new Map(ChargeMap.mapLVL1);
+    Perso player = new Perso(0, 0);
 
-    KeyListener k;
+    Level level = new Level(map,player);
 
     public Graphics() {
+       // addKeyListener(new Level(map,pers));
         PrintFrame();
+
     }
 
     public void PrintFrame() {
@@ -75,8 +85,46 @@ public class Graphics extends JFrame {
         frame.setContentPane(panel);
         frame.setVisible(true);
 
-    }}
+    }
+    }
+
+    @Override
+    protected void processKeyEvent(KeyEvent ke) {
+        Scanner sc = new Scanner(System.in);
+        try{
+            if (ke.getID() != KeyEvent.KEY_PRESSED || level.isDone()) {
+            return;
+        }
+            level.movePerso(ke.getKeyCode());
+            System.out.println("Lifes = " + player.getLife());
+            //repaint();
+
+            if(ke.getKeyCode()==16){
+                System.out.print("entrez votre nom: ");
+                saveToTextFile(sc.nextLine(), map, player);
+                System.out.println("LE JEU A ETE SAUVEGARDE");
+                System.exit(0);
+            }
 
 
+            if (level.isDone()) {
+                player.setCurrentCase('o');
+                player.setLife(3); // remet les vies quand le niveau est terminé
+                Play.lvlnumber++;
+                JOptionPane.showMessageDialog(this, "Congratulations ! Level cleared !");
+            }
+
+            if (level.isOver()) {
+                System.out.println("LOOSER");
+                JOptionPane.showMessageDialog(this, "LOOSER");
+                System.exit(0);
+
+            }
+
+
+        } catch (NullPointerException error){
+            System.out.println("ERREUR");
+        }
+    }
 }
 
