@@ -5,42 +5,37 @@ import View.Graphics;
 import com.sun.deploy.panel.RuleSetViewerDialog;
 
 import java.io.*;
-import static Controller.Play.*;
+import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
+import static Controller.Play.*;
+import static Controller.Play.startMenu;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Graphics home = new Graphics();
-
-        int userSelected;
-        do {
-            userSelected = MenuData();
-            switch (userSelected) {
-                case 1:
-                    System.out.println("Voici les règles du jeu :");
-                    System.out.println("##########################");
-
-                    break;
-                case 2:
-                    playGame(false, null);
-                    break;
-                case 3:
-                    chooseTextFile();
-                    break;
-                case 4:
-                    System.out.println("QUITTER");
-                    System.exit(0);
-                    break;
-            }
+        try {
+            timer.start();
+            startMenu();
+        } catch (InputMismatchException e) {
+            System.out.println("Vous n'avez pas sélectionné la bonne touche");
+            startMenu();
         }
-        while (userSelected > 4);
 
-        home.setVisible(true);
 
+        //  Graphics home = new Graphics();
+        // home.setVisible(true);
     }
+
+
 
 
 }

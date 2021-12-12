@@ -4,16 +4,18 @@ public class Level  {
 
     private Map map;
     private Map startMap;
-    private Perso perso;
-    // private Enemy enemy;
+    private static Perso perso;
     private boolean isDone = false;
     private boolean isOver = false;
+    static CountTime timer = new CountTime();
+    static int score = 10;
 
     public Level(Map map, Perso perso) {
         this.map = map;
         this.startMap = new Map(map.getMap().clone());
         this.perso = perso;
         startLevel();
+
     }
 
     private void startLevel() {
@@ -71,8 +73,8 @@ public class Level  {
         if(playerMoved == true && perso.getCurrentCase() == 'T'){
             teleportPerso(perso.getxPerso(), perso.getyPerso());
         }
-        if(playerMoved == true){
-            changeCase(tempCurrentCase,tempPosX,tempPosY);
+        if(playerMoved == true) {
+            changeCase(tempCurrentCase, tempPosX, tempPosY);
         }
     }
 
@@ -112,6 +114,15 @@ public class Level  {
                 map.setCase(x,y,currentCase);
                 break;
         }
+    }
+
+    public static int Score(){
+        perso.setScore(score);
+        if(perso.getCurrentCase() == 'E' && timer.secondPassed < 10){
+            perso.setScore(perso.getScore()*10);
+
+        }
+        return perso.getScore();
     }
 
     private void teleportPerso(int x, int y) {

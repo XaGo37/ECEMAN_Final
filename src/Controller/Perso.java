@@ -3,7 +3,7 @@ package Controller;
 public class Perso {
 
     private int xPerso;
-    private int yPerso;
+    private int yPerso;private int score;
 
     private char currentCase = 'o';
     private boolean islight = false;
@@ -49,6 +49,7 @@ public class Perso {
         return currentCase;
     }
 
+
     public void setCurrentCase(char currentCase) {
         this.currentCase = currentCase;
     }
@@ -68,5 +69,13 @@ public class Perso {
 
     public void setLife(int life) {
         this.life = life;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
