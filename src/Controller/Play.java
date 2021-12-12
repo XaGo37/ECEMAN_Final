@@ -1,12 +1,12 @@
 package Controller;
 
 import Model.ChargeMap;
+import Model.Map;
+import Model.Perso;
 import View.Affichage;
 
 import java.io.*;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static Controller.Save.readTextFile;
 import static Controller.Save.saveToTextFile;

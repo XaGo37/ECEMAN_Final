@@ -1,4 +1,4 @@
-package Controller;
+package Model;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,12 @@ public class Map {
         map[x][y] = carCase;
     }
 
-
+    public char getEnemyCase(int x, int y){
+        return map[x][y];
+    }
+    public void setEnemyCase(int x, int y, char carCase){
+        map[x][y] = carCase;
+    }
 }
 
 

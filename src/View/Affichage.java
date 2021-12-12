@@ -1,7 +1,7 @@
 package View;
 
-import Controller.Perso;
-import Controller.Map;
+import Model.Perso;
+import Model.Map;
 
 public class Affichage {
 

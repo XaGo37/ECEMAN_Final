@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Map;
+import Model.Map;
 import Model.ChargeMap;
 
 import javax.swing.*;

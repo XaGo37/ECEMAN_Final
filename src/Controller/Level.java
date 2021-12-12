@@ -1,10 +1,19 @@
 package Controller;
 
+import Model.Enemy;
+import Model.Map;
+import Model.Perso;
+
+import java.util.Random;
+
+import static Controller.Play.lvlnumber;
+
 public class Level  {
 
     private Map map;
     private Map startMap;
     private static Perso perso;
+    private Enemy enemy = new Enemy(0,0);
     private boolean isDone = false;
     private boolean isOver = false;
     static CountTime timer = new CountTime();
@@ -15,6 +24,7 @@ public class Level  {
         this.startMap = new Map(map.getMap().clone());
         this.perso = perso;
         startLevel();
+        startEnemy();
 
     }
 
@@ -30,6 +40,68 @@ public class Level  {
         }
     }
 
+    public void startEnemy(){
+        this.map.setMap(startMap.getMap());
+        for (int i = 0; i < map.getSizeY(); i++) {
+            for (int j = 0; j <  map.getSizeX(); j++) {
+                if(map.getEnemyCase(i,j)=='<'){
+                    enemy.setEnemyCoords(i,j);
+                }
+            }
+        }
+    }
+
+
+    public void moveEnemy(){
+        int tempPosX = enemy.getXEnemy();
+        int tempPosY = enemy.getyEnemy();
+        char tempCurrentCase = enemy.getCurrentEnemyCase();
+        Random rand = new Random();
+        int move = rand.nextInt(4);
+        System.out.println(move);
+        boolean enemyMoved = false;
+
+        System.out.println(move);
+        switch(move){
+            case 1 :
+                if (testBlock(enemy.getXEnemy()-1, enemy.getyEnemy())) {
+                    enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX - 1, tempPosY));
+                    enemy.setxEnemy(enemy.getXEnemy() - 1);
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    enemyMoved = true;
+                }
+                break;
+            case 2 :
+                if (testBlock(enemy.getXEnemy()+1, enemy.getyEnemy())) {
+                    enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX + 1, tempPosY));
+                    enemy.setxEnemy(enemy.getXEnemy()+1);
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    enemyMoved = true;
+                }
+                break;
+            case 3 :
+                if (testBlock(enemy.getXEnemy(), enemy.getyEnemy()-1)) {
+                    enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX, tempPosY - 1));
+                    enemy.setxEnemy(enemy.getyEnemy() - 1);
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    enemyMoved = true;
+                }
+                break;
+            case 4 :
+                if (testBlock(enemy.getXEnemy(), enemy.getyEnemy()+1)) {
+                    enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX, tempPosY + 1));
+                    enemy.setxEnemy(enemy.getyEnemy() + 1);
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    enemyMoved = true;
+                    break;
+                }
+                if(enemyMoved == true) {
+                    changeCase(tempCurrentCase, tempPosX, tempPosY);
+                }
+        }
+
+    }
+
     public void movePerso(char direction) {
 
         int tempPosX = perso.getxPerso();
@@ -43,6 +115,8 @@ public class Level  {
                     perso.setCurrentCase(map.getCase(tempPosX - 1, tempPosY));
                     perso.setxPerso(perso.getxPerso() - 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    if(lvlnumber == 5)
+                    {moveEnemy();}
                     playerMoved = true;
                 }
                 break;
@@ -51,7 +125,10 @@ public class Level  {
                     perso.setCurrentCase(map.getCase(tempPosX + 1, tempPosY));
                     perso.setxPerso(perso.getxPerso() + 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    if(lvlnumber == 5)
+                    {moveEnemy();}
                     playerMoved = true;
+
                 }
                 break;
             case 'q':
@@ -59,6 +136,8 @@ public class Level  {
                     perso.setCurrentCase(map.getCase(tempPosX, tempPosY - 1));
                     perso.setyPerso(perso.getyPerso() - 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
+                    if(lvlnumber == 5)
+                    {moveEnemy();}
                     playerMoved = true;
                 }
                 break;
@@ -68,6 +147,10 @@ public class Level  {
                     perso.setyPerso(perso.getyPerso() + 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
+                    if(lvlnumber == 5)
+                    {
+                        moveEnemy();
+                    }
                 }
         }
         if(playerMoved == true && perso.getCurrentCase() == 'T'){
@@ -77,6 +160,21 @@ public class Level  {
             changeCase(tempCurrentCase, tempPosX, tempPosY);
         }
     }
+
+    private void changeEnemyCase(char currentEnemyCase, int x, int y){
+        switch(currentEnemyCase){
+            case 'T' : //TELEPORTEUR
+                map.setEnemyCase(x,y,'t');
+                break;
+            case 'L' : //LEGERETE
+                map.setEnemyCase(x,y,'o');
+                break;
+            default :
+                map.setEnemyCase(x,y,currentEnemyCase);
+                break;
+        }
+    }
+
 
     private void changeCase(char currentCase, int x, int y){
         if(perso.getCurrentCase() == 'E') {

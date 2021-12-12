@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Map;
+import Model.Perso;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
