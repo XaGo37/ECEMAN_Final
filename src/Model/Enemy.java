@@ -5,7 +5,7 @@ public class Enemy {
     private int xEnemy;
     private int yEnemy;
 
-    private char currentEnemyCase = 'o';
+    private char currentEnemyCase = '<';
 
 
     public Enemy(int x, int y){
@@ -40,11 +40,6 @@ public class Enemy {
     public void setEnemyCoords(int x,int y){
         xEnemy = x;
         yEnemy = y;
-    }
-
-
-    public void currentEnemyCase(char currentEnemyCase) {
-        this.currentEnemyCase = currentEnemyCase;
     }
 
 

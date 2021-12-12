@@ -28,7 +28,7 @@ public class Graphics extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(650, 400);
 
-        JPanel panel = new JPanel(new GridLayout(10, 19,0,0));
+        JPanel panel = new JPanel(new GridLayout(15, 19,0,0));
 
         JLabel label = new JLabel();
 
@@ -71,6 +71,7 @@ public class Graphics extends JFrame {
         frame.setContentPane(panel);
         frame.setVisible(true);
 
-    }}
+    }
+    }
 }
 

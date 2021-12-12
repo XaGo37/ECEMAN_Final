@@ -6,53 +6,42 @@ import Model.Perso;
 
 import java.util.Random;
 
-import static Controller.Play.lvlnumber;
-
 public class Level  {
 
+    //CREATION des objets
     private Map map;
     private Map startMap;
     private static Perso perso;
+    static CountTime timer = new CountTime();
     private Enemy enemy = new Enemy(0,0);
+
+
     private boolean isDone = false;
     private boolean isOver = false;
-    static CountTime timer = new CountTime();
+
     static int score = 10;
 
-    public Level(Map map, Perso perso) {
+
+    public Level(Map map, Perso perso) {        //Constructeur
         this.map = map;
-        this.startMap = new Map(map.getMap().clone());
+        this.startMap = new Map(map.getMap().clone()); //Map de départ
         this.perso = perso;
         startLevel();
-        startEnemy();
-
     }
 
-    private void startLevel() {
+    private void startLevel() {         //Placement du perso
         this.map.setMap(startMap.getMap());
         perso.initPerso();
-        for (int i = 0; i < map.getSizeY(); i++) {
-            for (int j = 0; j <  map.getSizeX(); j++) {
-                if(map.getCase(i,j) == 'P'){
-                    perso.setCoords(i,j);
+        for (int i = 0; i < map.getSizeY(); i++) {          //Parcourir la map en X et Y jusqu'à trouver un 'P'
+            for (int j = 0; j < map.getSizeX(); j++) {
+                if (map.getCase(i, j) == 'P') {
+                    perso.setCoords(i, j);
                 }
             }
         }
     }
 
-    public void startEnemy(){
-        this.map.setMap(startMap.getMap());
-        for (int i = 0; i < map.getSizeY(); i++) {
-            for (int j = 0; j <  map.getSizeX(); j++) {
-                if(map.getEnemyCase(i,j)=='<'){
-                    enemy.setEnemyCoords(i,j);
-                }
-            }
-        }
-    }
-
-
-    public void moveEnemy(){
+    public void moveEnemy(){   //Déplacement enemie mais sans réussite
         int tempPosX = enemy.getXEnemy();
         int tempPosY = enemy.getyEnemy();
         char tempCurrentCase = enemy.getCurrentEnemyCase();
@@ -60,14 +49,12 @@ public class Level  {
         int move = rand.nextInt(4);
         System.out.println(move);
         boolean enemyMoved = false;
-
-        System.out.println(move);
         switch(move){
             case 1 :
                 if (testBlock(enemy.getXEnemy()-1, enemy.getyEnemy())) {
                     enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX - 1, tempPosY));
                     enemy.setxEnemy(enemy.getXEnemy() - 1);
-                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '>');
                     enemyMoved = true;
                 }
                 break;
@@ -75,7 +62,7 @@ public class Level  {
                 if (testBlock(enemy.getXEnemy()+1, enemy.getyEnemy())) {
                     enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX + 1, tempPosY));
                     enemy.setxEnemy(enemy.getXEnemy()+1);
-                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '>');
                     enemyMoved = true;
                 }
                 break;
@@ -83,7 +70,7 @@ public class Level  {
                 if (testBlock(enemy.getXEnemy(), enemy.getyEnemy()-1)) {
                     enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX, tempPosY - 1));
                     enemy.setxEnemy(enemy.getyEnemy() - 1);
-                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '>');
                     enemyMoved = true;
                 }
                 break;
@@ -91,7 +78,7 @@ public class Level  {
                 if (testBlock(enemy.getXEnemy(), enemy.getyEnemy()+1)) {
                     enemy.setCurrentEnemyCase(map.getEnemyCase(tempPosX, tempPosY + 1));
                     enemy.setxEnemy(enemy.getyEnemy() + 1);
-                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '<');
+                    map.setEnemyCase(enemy.getXEnemy(), enemy.getyEnemy(), '>');
                     enemyMoved = true;
                     break;
                 }
@@ -102,42 +89,36 @@ public class Level  {
 
     }
 
-    public void movePerso(char direction) {
+    public void movePerso(char direction) {  //Deplacement perso
 
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         char tempCurrentCase = perso.getCurrentCase();
         boolean playerMoved = false;
 
-        switch (direction) {
+        switch (direction) {   //Entrer via scanner une touche z,s,q,d
             case 'z':
-                if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {
-                    perso.setCurrentCase(map.getCase(tempPosX - 1, tempPosY));
-                    perso.setxPerso(perso.getxPerso() - 1);
-                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
-                    if(lvlnumber == 5)
-                    {moveEnemy();}
+                if (testBlock(perso.getxPerso() - 1, perso.getyPerso())) {       //Si on peut bouger sur le block
+                    perso.setCurrentCase(map.getCase(tempPosX - 1, tempPosY));   //Récupération de la case X-1
+                    perso.setxPerso(perso.getxPerso() - 1);                         //Deplacement du perso X-1
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P'); //Remplacement de la case par 'P'
                     playerMoved = true;
                 }
                 break;
             case 's':
-                if (testBlock(perso.getxPerso() + 1, perso.getyPerso())) {
-                    perso.setCurrentCase(map.getCase(tempPosX + 1, tempPosY));
-                    perso.setxPerso(perso.getxPerso() + 1);
-                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
-                    if(lvlnumber == 5)
-                    {moveEnemy();}
+                if (testBlock(perso.getxPerso() + 1, perso.getyPerso())) {      //Si on peut bouger sur le block
+                    perso.setCurrentCase(map.getCase(tempPosX + 1, tempPosY));  //Récupération de la case X+1
+                    perso.setxPerso(perso.getxPerso() + 1);                        //Deplacement du perso X+1
+                    map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');//Remplacement de la case par 'P'
                     playerMoved = true;
 
                 }
                 break;
             case 'q':
-                if (testBlock(perso.getxPerso(), perso.getyPerso() - 1)) {
+                if (testBlock(perso.getxPerso(), perso.getyPerso() - 1)) {  // Même principe qu'au dessus mais en Y
                     perso.setCurrentCase(map.getCase(tempPosX, tempPosY - 1));
                     perso.setyPerso(perso.getyPerso() - 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
-                    if(lvlnumber == 5)
-                    {moveEnemy();}
                     playerMoved = true;
                 }
                 break;
@@ -147,24 +128,24 @@ public class Level  {
                     perso.setyPerso(perso.getyPerso() + 1);
                     map.setCase(perso.getxPerso(), perso.getyPerso(), 'P');
                     playerMoved = true;
-                    if(lvlnumber == 5)
-                    {
-                        moveEnemy();
-                    }
                 }
         }
-        if(playerMoved == true && perso.getCurrentCase() == 'T'){
+
+        if(perso.getCurrentCase() =='<'){
+            setOver(true);
+        }
+        if(playerMoved == true && perso.getCurrentCase() == 'T'){  //Si le player a bougé et on est sur une case téléportation
             teleportPerso(perso.getxPerso(), perso.getyPerso());
         }
-        if(playerMoved == true) {
+        if(playerMoved == true) { //Si player a bougé, appel de la méthode changeCase
             changeCase(tempCurrentCase, tempPosX, tempPosY);
         }
     }
 
-    private void changeEnemyCase(char currentEnemyCase, int x, int y){
+    private void changeEnemyCase(char currentEnemyCase, int x, int y){  //Changement de case, pénalité pour le player
         switch(currentEnemyCase){
-            case 'T' : //TELEPORTEUR
-                map.setEnemyCase(x,y,'t');
+            case 'T' :                             //TELEPORTEUR, si enemie dessus le joueur ne pourrais pas y aller
+                map.setEnemyCase(x,y,'t');     //T devient t
                 break;
             case 'L' : //LEGERETE
                 map.setEnemyCase(x,y,'o');
@@ -176,13 +157,13 @@ public class Level  {
     }
 
 
-    private void changeCase(char currentCase, int x, int y){
-        if(perso.getCurrentCase() == 'E') {
+    private void changeCase(char currentCase, int x, int y){   //Modification des cases après passage player
+        if(perso.getCurrentCase() == 'E') {         //Si on est sur arrivé sur 'E' niveau terminé
             setDone(true);
         }
-        if (perso.getCurrentCase() == ' ') {
+        if (perso.getCurrentCase() == ' ') {        //Si on passe sur de l'eau, vie-1
             perso.setLife(perso.getLife() - 1);
-            if (perso.getLife() <= 0) {
+            if (perso.getLife() <= 0) {             //Si on a 0 vies level is Over
                 setOver(true);
             } else {
                 startLevel();
@@ -192,9 +173,9 @@ public class Level  {
             map.setCase(x,y,currentCase);
             return;
         }
-        switch(currentCase){
+        switch(currentCase){            //Remplacement des cases
             case 'o' :
-                map.setCase(x,y,' ');
+                map.setCase(x,y,' ');       //Si on passe sur 'o' remplacement par ' ' -> eau
                 break;
             case 'X' : // GLACE EPAISSE
                 map.setCase(x,y,'o');
@@ -214,21 +195,21 @@ public class Level  {
         }
     }
 
-    public static int Score(){
+    public static int Score(){        //Création du score
         score= perso.getScore();
         perso.setScore(score*10);
-        if(perso.getCurrentCase() == 'E' && timer.secondPassed < 10){
+        if(perso.getCurrentCase() == 'E' && timer.secondPassed < 10){ //Si on termine un niveau en moins de 10 sec
             perso.setScore(perso.getScore()*10);
 
         }
         return perso.getScore();
     }
 
-    private void teleportPerso(int x, int y) {
+    private void teleportPerso(int x, int y) {              //Teleportation du perso
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         changeCase('T', tempPosX,tempPosY);
-        for (int i = 0; i < map.getSizeY(); i++) {
+        for (int i = 0; i < map.getSizeY(); i++) {              //Parcours de la map
             for (int j = 0; j < map.getSizeX(); j++) {
                 if (map.getCase(i, j) == 'T' && !(i == x && j==y)) {
                     perso.setCoords(i, j);
@@ -238,14 +219,13 @@ public class Level  {
         }
     }
 
-    private boolean testBlock(int x, int y) {
+    private boolean testBlock(int x, int y) {               //Test des block, regarde les énumérations
         for (PassableBlocks passBlock : PassableBlocks.values()) {
-            System.out.println(map.getCase(x, y));
-            if (map.getCase(x, y) == passBlock.asChar()) {
+            if (map.getCase(x, y) == passBlock.asChar()) {  //Si block passable on renvoit true
                 return true;
             }
         }
-        return false;
+        return false;               //Si block non passable on renvoit false
     }
 
     public boolean isDone() {

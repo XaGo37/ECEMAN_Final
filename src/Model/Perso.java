@@ -50,7 +50,6 @@ public class Perso {
         return currentCase;
     }
 
-
     public void setCurrentCase(char currentCase) {
         this.currentCase = currentCase;
     }
@@ -62,7 +61,6 @@ public class Perso {
     public void setIslight(boolean islight) {
         this.islight = islight;
     }
-
 
     public int getLife() {
         return life;

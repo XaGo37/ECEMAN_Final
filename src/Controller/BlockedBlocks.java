@@ -1,7 +1,7 @@
 package Controller;
 
 
-public enum BlockedBlocks {
+public enum BlockedBlocks {  //Renvoie en char les blocks non passable
     M('M'),X('X'),W('W');
 
     public char asChar() {

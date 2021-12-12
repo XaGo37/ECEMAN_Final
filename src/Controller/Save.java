@@ -6,9 +6,24 @@ import Model.Perso;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Save extends Play {
-    public static void saveToTextFile(String fileName, Map map, Perso perso) {
+
+    static void chooseTextFile() {                      //Sélection d'une partie
+        System.out.println("Sauvegardes disponibles:");
+        File f = new File("src/TextFile/");
+        for (String pathname : f.list()) {
+            System.out.println("- "+pathname.split("\\.")[0]);
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.print("choisir une sauvegarde: ");
+        String save = sc.nextLine();
+        readTextFile(save);
+    }
+
+
+    public static void saveToTextFile(String fileName, Map map, Perso perso) { //Sauvegarde d'une partie
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File("src/TextFile/"+fileName+".txt")));
@@ -36,7 +51,7 @@ public class Save extends Play {
         }
     }
 
-    public static void readTextFile(String filename) {
+    public static void readTextFile(String filename) {          //Lecture d'une partie sauvegardé
 
         try{
             BufferedReader reader = Files.newBufferedReader(Paths.get("src/TextFile/" + filename + ".txt"));

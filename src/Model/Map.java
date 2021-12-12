@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Map {
     private char[][] map;
+    private char [][] map1;
 
     public Map(char[][]map){
         setMap(map);
@@ -11,6 +12,7 @@ public class Map {
     public char[][] getMap(){
         return this.map;
     }
+
     public void setMap(char[][] map) {
         this.map = new char[map.length][map[0].length];
         for (int i = 0; i < map.length; i++) {
