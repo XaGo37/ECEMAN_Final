@@ -3,7 +3,11 @@ package Controller;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CountTime {            //Création d'un compteur
+
+/**
+ * Création d'un compteur
+ */
+public class CountTime {
 
     int secondPassed = 0;
     Timer timer = new Timer();

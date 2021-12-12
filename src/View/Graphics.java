@@ -6,6 +6,9 @@ import Model.ChargeMap;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Création de la partie graphique, non aboutie
+ */
 
 public class Graphics extends JFrame {
 

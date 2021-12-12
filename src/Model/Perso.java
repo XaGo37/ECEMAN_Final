@@ -1,5 +1,9 @@
 package Model;
 
+
+/**
+ * Classe Perso
+ */
 public class Perso {
 
     private int xPerso;

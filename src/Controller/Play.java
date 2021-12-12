@@ -19,7 +19,9 @@ public class Play {
     public static final String COLOR_RED = "\u001B[31m";
 
 
-    //Création des différents objets
+    /**
+     *Création des différents objets
+     */
     static Perso player = new Perso(0, 0);
     static int lvlnumber = 1;
     static CountTime timer = new CountTime();
@@ -76,6 +78,12 @@ public class Play {
 
     }
 
+    /**
+     *
+     * @param isSavedLevel c'est un boolean, on sait si on veut recharger une map ou non
+     * @param savedMap Map sauvegardé
+     * @throws IOException traitement exception
+     */
     public static void playGame(boolean isSavedLevel, Map savedMap) throws IOException {
 
       //Création des objets map
@@ -119,6 +127,12 @@ public class Play {
         }
     }
 
+    /**
+     *
+     * @param player objet Player
+     * @param map objet Map
+     * @throws IOException
+     */
     private static void PlayLevel(Perso player, Map map) throws IOException {
 
         Level lvl = new Level(map, player);

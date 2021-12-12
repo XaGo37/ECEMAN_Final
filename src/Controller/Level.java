@@ -8,7 +8,9 @@ import java.util.Random;
 
 public class Level  {
 
-    //CREATION des objets
+    /**
+     * Création des objets
+     */
     private Map map;
     private Map startMap;
     private static Perso perso;
@@ -21,15 +23,23 @@ public class Level  {
 
     static int score = 10;
 
-
-    public Level(Map map, Perso perso) {        //Constructeur
+    /**
+     *
+     * @param map Objet Map
+     * @param perso Objet Perso
+     * Constructeur Level
+     */
+    public Level(Map map, Perso perso) {
         this.map = map;
         this.startMap = new Map(map.getMap().clone()); //Map de départ
         this.perso = perso;
         startLevel();
     }
 
-    private void startLevel() {         //Placement du perso
+    /**
+     * Placement du player 'P'
+     */
+    private void startLevel() {
         this.map.setMap(startMap.getMap());
         perso.initPerso();
         for (int i = 0; i < map.getSizeY(); i++) {          //Parcourir la map en X et Y jusqu'à trouver un 'P'
@@ -89,7 +99,12 @@ public class Level  {
 
     }
 
-    public void movePerso(char direction) {  //Deplacement perso
+    /**
+     *
+     * @param direction depuis scanner c'est la touche sur laquelle on appuie
+     * Methode permettant de déplacer le player selon la direction
+     */
+    public void movePerso(char direction) {
 
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
@@ -142,7 +157,16 @@ public class Level  {
         }
     }
 
-    private void changeEnemyCase(char currentEnemyCase, int x, int y){  //Changement de case, pénalité pour le player
+    /**
+     *
+     * Méthode non nécessaire au fonctionnement car niveau 5 non terminé
+     * @param currentEnemyCase
+     * @param x
+     * @param y
+     * Changement de case, pénalité pour le player
+     */
+
+    private void changeEnemyCase(char currentEnemyCase, int x, int y){
         switch(currentEnemyCase){
             case 'T' :                             //TELEPORTEUR, si enemie dessus le joueur ne pourrais pas y aller
                 map.setEnemyCase(x,y,'t');     //T devient t
@@ -156,8 +180,13 @@ public class Level  {
         }
     }
 
-
-    private void changeCase(char currentCase, int x, int y){   //Modification des cases après passage player
+    /**
+     * Méthode permetant la modification des cases après passage player
+     * @param currentCase case sur laquelle on se trouve
+     * @param x position x sur laquelle on se trouve
+     * @param y position y sur laquelle on se trouve
+     */
+    private void changeCase(char currentCase, int x, int y){
         if(perso.getCurrentCase() == 'E') {         //Si on est sur arrivé sur 'E' niveau terminé
             setDone(true);
         }
@@ -205,7 +234,14 @@ public class Level  {
         return perso.getScore();
     }
 
-    private void teleportPerso(int x, int y) {              //Teleportation du perso
+
+    /**
+     * Téléportation du perso
+     * @param x position x sur laquelle on se trouve
+     * @param y position y sur laquelle on se trouve
+     */
+
+    private void teleportPerso(int x, int y) {
         int tempPosX = perso.getxPerso();
         int tempPosY = perso.getyPerso();
         changeCase('T', tempPosX,tempPosY);
@@ -219,7 +255,14 @@ public class Level  {
         }
     }
 
-    private boolean testBlock(int x, int y) {               //Test des block, regarde les énumérations
+
+    /**
+     * Test des block, regarde les énumérations
+     * @param x
+     * @param y
+     * @return
+     */
+    private boolean testBlock(int x, int y) {
         for (PassableBlocks passBlock : PassableBlocks.values()) {
             if (map.getCase(x, y) == passBlock.asChar()) {  //Si block passable on renvoit true
                 return true;

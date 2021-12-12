@@ -3,7 +3,11 @@ package View;
 import Model.Perso;
 import Model.Map;
 
-public class Affichage { //Affichage de la map dans la console
+
+/**
+ * Affichage de la map dans la console
+ */
+public class Affichage {
 
     public static void afficher(Map map, Perso perso){
         for (int i = 0; i < map.getSizeY(); i++) {

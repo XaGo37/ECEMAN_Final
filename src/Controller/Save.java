@@ -10,7 +10,10 @@ import java.util.Scanner;
 
 public class Save extends Play {
 
-    static void chooseTextFile() {                      //Sélection d'une partie
+    /**
+     * Sélection d'une partie
+     */
+    static void chooseTextFile() {
         System.out.println("Sauvegardes disponibles:");
         File f = new File("src/TextFile/");
         for (String pathname : f.list()) {
@@ -22,7 +25,12 @@ public class Save extends Play {
         readTextFile(save);
     }
 
-
+    /**
+     * Sauvegarde d'une partie
+     * @param fileName Nom du fichier .txt
+     * @param map objet Map
+     * @param perso objet perso
+     */
     public static void saveToTextFile(String fileName, Map map, Perso perso) { //Sauvegarde d'une partie
 
         try {
@@ -51,7 +59,11 @@ public class Save extends Play {
         }
     }
 
-    public static void readTextFile(String filename) {          //Lecture d'une partie sauvegardé
+    /**
+     * On vient lire toutes les informations sauvegardées
+     * @param filename Nom du fichier .txt
+     */
+    public static void readTextFile(String filename) {
 
         try{
             BufferedReader reader = Files.newBufferedReader(Paths.get("src/TextFile/" + filename + ".txt"));

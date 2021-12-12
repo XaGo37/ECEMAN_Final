@@ -1,9 +1,9 @@
 package Model;
 
 public class ChargeMap {
-
-
-
+    /**
+     * Classe ou sont repertorié toutes les maps
+     */
     public static char[][] mapLVL1 = {
             {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
             {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},

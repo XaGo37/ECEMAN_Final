@@ -2,6 +2,9 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe Map
+ */
 public class Map {
     private char[][] map;
     private char [][] map1;
