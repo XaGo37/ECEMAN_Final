@@ -4,7 +4,7 @@ public class Perso {
 
     private int xPerso;
     private int yPerso;
-    private int score;
+    private int score = 10;
 
     private char currentCase = 'o';
     private boolean islight = false;

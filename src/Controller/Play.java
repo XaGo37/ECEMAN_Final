@@ -31,7 +31,6 @@ public class Play {
     public static void startMenu() throws IOException {
         int userSelected;
 
-
         do {
             userSelected = MenuData();
             switch (userSelected) {
@@ -85,38 +84,28 @@ public class Play {
                 isSavedLevel = false;
                 System.out.println("LEVEL "+ lvlnumber);
                 PlayLevel(player,savedMap);
-                System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
             }
 
             switch(lvlnumber){
                 case 1:
                     System.out.println("LEVEL 1 ");
                     PlayLevel(player,mapLvl1);
-                    System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
                 case 2:
                     System.out.println("LEVEL 2 ");
                     PlayLevel(player,mapLvl2);
-                    System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
                 case 3:
                     System.out.println("LEVEL 3 ");
                     PlayLevel(player,mapLvl3);
-                    System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
                 case 4:
                     System.out.println("LEVEL 4");
                     PlayLevel(player,mapLvl4);
-                    System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
                     break;
                 case 5:
                     System.out.println("LEVEL 5");
                     PlayLevel(player,mapLvl5);
-                    System.out.println("-------------------------------- 5 - QUITTER & SAUVEGARDER");
-
                     break;
             }
         }
@@ -125,44 +114,49 @@ public class Play {
     private static void PlayLevel(Perso player, Map map) throws IOException {
 
         Level lvl = new Level(map, player);
-
         Scanner sc = new Scanner(System.in);
+     //   int score = player.getScore();
+
         try {
 
             while (!lvl.isOver() && !lvl.isDone()) {
                 Affichage.afficher(map, player);
                 System.out.println("Lifes = " + player.getLife() + " Waist time : " + timer.secondPassed
-                        + " Le score est de : " + player.getScore());
+                        + " Score : " + player.getScore());
+                System.out.println("----------------------------------------- 5 - QUITTER & SAUVEGARDER");
                 System.out.println("Enter choice : ");
                 char choice = sc.nextLine().charAt(0);
 
 
-                if (choice == '5') {
+                if (choice == '5') {                                                   //Si appuie sur 5
                     System.out.print("entrez votre nom: ");
-                    saveToTextFile(sc.nextLine(), map, player);
+                    saveToTextFile(sc.nextLine(), map, player);                     //Sauvegarde du jeu
                     System.out.println("LE JEU A ETE SAUVEGARDE");
                     System.exit(0);
                 }
                 lvl.movePerso(choice);
-                lvl.Score();
             }
             if (lvl.isDone()) {
                 player.setCurrentCase('o');
-                player.setLife(3); // remet les vies quand le niveau est terminé
+                player.setLife(3);                      // remet les vies quand le niveau est terminé
                 lvlnumber++;
                 timer.secondPassed = 0;
             }
+            if(lvl.isDone() && timer.secondPassed < 15){
+                lvl.Score();
+            }
 
             if (lvl.isOver()) {
-                System.out.println("LOOSER");
+                System.out.println("GAME OVER");
                 System.exit(0);
                 timer.secondPassed = 0;
+                lvl.score = 0;
 
             }
         } catch (IllegalStateException e) {
             System.out.println(" ");
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Rappuyez");
+            System.out.println("Appuyer de nouveau");
             PlayLevel(player,map);
         }
     }

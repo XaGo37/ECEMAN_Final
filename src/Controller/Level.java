@@ -215,7 +215,8 @@ public class Level  {
     }
 
     public static int Score(){
-        perso.setScore(score);
+        score= perso.getScore();
+        perso.setScore(score*10);
         if(perso.getCurrentCase() == 'E' && timer.secondPassed < 10){
             perso.setScore(perso.getScore()*10);
 
