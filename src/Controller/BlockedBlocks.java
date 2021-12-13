@@ -1,5 +1,9 @@
 package Controller;
 
+/**
+ * Enumeration des blocks non passable
+ */
+
 
 public enum BlockedBlocks {  //Renvoie en char les blocks non passable
     M('M'),X('X'),W('W');

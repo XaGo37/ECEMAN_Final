@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ECEMAN_ProjectJava:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ECEMAN_ProjectJava_jar</output-path>
+    <root id="archive" name="ECEMAN_ProjectJava.jar">
+      <element id="module-output" name="ECEMAN_ProjectJava" />
+    </root>
+  </artifact>
+</component>
